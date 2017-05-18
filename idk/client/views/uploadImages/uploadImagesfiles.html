@@ -1,0 +1,13 @@
+<template name="uploadedImagesFiles">
+  {{#if uploadedImagesFiles.count}}
+    <ul>
+      {{#each file in uploadedImagesFiles.each}}
+        <li>
+          <a href="{{file.link}}?download=true" download="{{file.name}}">{{file.name}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <div>No files uploaded, yet</div>
+  {{/if}}
+</template>
