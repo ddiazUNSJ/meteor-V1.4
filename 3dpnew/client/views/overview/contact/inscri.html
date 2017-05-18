@@ -1,0 +1,84 @@
+<template name="InscriForm">  
+  {{#autoForm schema=inscriFormSchema  id="inscriForm" type="method" meteormethod="preinscribe" validation="submit" class=formCss   }}             
+    <fieldset>
+
+<!-- 
+      <div class="form-group">
+        <label class="control-label" for="userN">Usuario</label>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-user glyph-color"></span></span>
+          {{> afFieldInput name='userN' class="form-control" placeholder="nombre de usuario o alias"}}
+        </div>   
+   -->
+<!--          Valida el campo inscriName, sino esta correcto muestra el mensaje de error del campo inscriName -->
+<!-- 
+        {{#if afFieldIsInvalid name='userN'}}
+          <span class="help-block">{{afFieldMessage name='userN'}}</span>
+        {{/if}}                
+      </div>
+
+ -->
+      <div class="form-group">
+        <label class="control-label" for="nombre">Name</label>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-user glyph-color"></span></span>
+          {{> afFieldInput name='nombre' class="form-control" placeholder="Tu Nombre"}}
+        </div>   
+<!--          Valida el campo inscriName, sino esta correcto muestra el mensaje de error del campo inscriName -->
+        {{#if afFieldIsInvalid name='nombre'}}
+          <span class="help-block">{{afFieldMessage name='nombre'}}</span>
+        {{/if}}                
+      </div>
+        
+        <div class="form-group">
+        <label class="control-label" for="dni">Dni</label>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-credit-card glyph-color"></span></span>
+          {{> afFieldInput name='dni' class="form-control custom-control" placeholder="Tu número de documento"}}
+        </div>  
+        {{#if afFieldIsInvalid name='dni'}}
+          <span class="help-block">{{afFieldMessage name='dni'}}</span>
+        {{/if}}                   
+      </div> 
+        
+      <div class="form-group">
+        <label class="control-label" for="Email">Your E-Mail</label>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-envelope glyph-color"></span></span>
+          {{> afFieldInput name='email' class="form-control" placeholder="Tu email"}}
+        </div> 
+        {{#if afFieldIsInvalid name='email'}}
+          <span class="help-block">{{afFieldMessage name='email'}}</span>
+        {{/if}}                      
+      </div>   
+        
+        <div class="form-group">
+        <label class="control-label" for="telefono">Teléfono</label>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-phone glyph-color"></span></span>
+          {{> afFieldInput name='telefono' class="form-control custom-control" placeholder="Tu número de teléfono"}}
+        </div>  
+        {{#if afFieldIsInvalid name='telefono'}}
+          <span class="help-block">{{afFieldMessage name='telefono'}}</span>
+        {{/if}}                   
+      </div> 
+        
+         <div class="form-group">
+        <label class="control-label" for="facultad">Facultad de Origen</label>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-text-size glyph-color"></span></span>
+          {{> afFieldInput name='facultad' type='select' options="allowed" firstOption="(Selecciona tu facultad)" class="form-control custom-control" placeholder="Indica tu facultad"}}
+        </div>  
+        {{#if afFieldIsInvalid name='facultad'}}
+          <span class="help-block">{{afFieldMessage name='facultad'}}</span>
+        {{/if}}                   
+      </div> 
+               
+        
+       
+      <div>
+        <button type="submit" class="btn btn-block btn-primary btn-lg">Pre-inscribirse</button>
+      </div>
+    </fieldset>
+  {{/autoForm}}
+</template>

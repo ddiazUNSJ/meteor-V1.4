@@ -1,0 +1,46 @@
+/*****************************************************************************/
+/* Footer: Style */
+/*****************************************************************************/
+
+#footer {
+  background-color: @magic-color-3-light;
+  color: @magic-color;
+  padding-top: 50px;
+  padding-bottom: 25px;
+}
+
+.icon-wrapper-small {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: @magic-color-3;
+  text-align: center;
+  margin: 0 6px;
+  display: block;
+  position: relative;  
+  padding: 0.4em 0;
+}
+
+.icon-wrapper-small img {
+  max-height: 20px;
+}
+
+@media (min-width: @screen-sm-min) { 
+  #footer img {
+    margin: 0 auto;
+    margin-top: 24px;
+   // border: 8px solid @magic-color;
+    height: 100px;
+  }
+}
+
+@media (max-width: @screen-xs-max) { 
+  #footer img:before {
+    text-align: rigth;
+  }
+  #footer img {
+    margin: 0 auto;
+  //  border: 8px solid @magic-color;
+    height: 100px;
+  }
+}

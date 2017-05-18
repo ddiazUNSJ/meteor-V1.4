@@ -1,0 +1,69 @@
+
+
+<!-- <template name="Listp">
+  <section id="listp" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 col-sm-6 text-right">
+         <p> HOLA H</p>
+          <h1 class="big-headline  waypoint fade-up">Lista de PreInscriptos de</h1>
+          <div class="waypoint fade-right">
+          <p class="lead"> Aqui poner algo..</p>
+        </div>
+        </div>
+
+        <div class="col-sm-6 col-md-offset-1 col-md-6 text-center">
+        <img class="img-resposive" src="/images/laboratorio.jpg">
+           <p> HOLA</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+
+ -->
+
+ <template name="Listp">
+
+<section id="listp" class="section-padding">
+    <div class="container">
+      <div class="row">
+          <h1>Lista de Pre-Inscriptos</h1>
+     <table class="table table-hover"> 
+       
+ 
+
+  
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Facultad</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+            {{#each userxz}}
+              <tr>
+                <td>{{profile.nombre}}</td>
+                <td>{{profile.dni}}</td>
+                <td>{{emails.[0].address}}</td> 
+                 <td>{{profile.facultad}}</td>
+                <td>{{createdAt}}</td>
+
+        
+              </tr>
+            {{/each}}
+
+            </tbody>
+          </table>
+      </div>
+    </div>
+</section>
+
+</template>
+ 

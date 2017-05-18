@@ -1,0 +1,68 @@
+<template name="DatosForm">  
+
+<!-- Activar -->
+    {{#autoForm collection="Meteor.users"  id="datosForm" doc=currentUser type="update" validation="submit"  class=formCss}}
+
+
+   <!--   {{#autoForm collection="Inscriptos"  id="datosForm" doc=currentUser type="update" validation="submit"  class=formCss}}
+
+ -->
+    <fieldset>
+  
+      <div class="form-group">
+        <label class="control-label" for="nombre">Name</label>
+        <div class="input-group input-group-lg">
+  <span class="input-group-addon"><span class="glyphicon glyphicon-user glyph-color"><label>&nbsp;&nbsp; Nombre</label></span></span>
+          {{> afFieldInput name='profile.nombre' class="form-control" placeholder="Tu Nombre"}}
+        </div>   
+<!--          Valida el campo inscriName, sino esta correcto muestra el mensaje de error del campo inscriName -->
+        {{#if afFieldIsInvalid name='profile.nombre'}}
+          <span class="help-block">{{afFieldMessage name='profile.nombre'}}</span>
+        {{/if}}                
+      </div>
+        
+        <div class="form-group">
+        <label class="control-label" for="dni">Dni</label>
+        <div class="input-group input-group-lg">
+ <span class="input-group-addon"><span class="glyphicon glyphicon-credit-card glyph-color"><label>&nbsp;&nbsp;&nbsp;&nbsp;  DNI</label></span></span>
+          {{> afFieldInput name='profile.dni' class="form-control custom-control" placeholder="Tu número de documento"}}
+        </div>  
+        {{#if afFieldIsInvalid name='profile.dni'}}
+          <span class="help-block">{{afFieldMessage name='profile.dni'}}</span>
+        {{/if}}                   
+      </div> 
+        
+
+        
+        <div class="form-group">
+        <label class="control-label" for="telefono">Teléfono</label>
+        <div class="input-group input-group-lg">
+ <span class="input-group-addon"><span class="glyphicon glyphicon-phone glyph-color"><label> &nbsp;&nbsp;  Teléfono</label></span></span>
+          {{> afFieldInput name='profile.telefono' class="form-control custom-control" placeholder="Tu número de teléfono"}}
+        </div>  
+        {{#if afFieldIsInvalid name='profile.telefono'}}
+          <span class="help-block">{{afFieldMessage name='profile.telefono'}}</span>
+        {{/if}}                   
+      </div> 
+        
+         <div class="form-group">
+        <label class="control-label" for="facultad">Facultad de Origen</label>
+        <div class="input-group input-group-lg">
+       <span class="input-group-addon"><span class="glyphicon glyphicon-text-size glyph-color"><label> &nbsp;  Facultad</label></span></span>
+          {{> afFieldInput name='profile.facultad' type='select' options="allowed" class="form-control custom-control" placeholder="Indica tu facultad"}}
+        </div>  
+        {{#if afFieldIsInvalid name='profile.facultad'}}
+          <span class="help-block">{{afFieldMessage name='profile.facultad'}}</span>
+        {{/if}}                   
+      </div> 
+               
+     
+               
+        
+      </fieldset>     
+      <div>
+        <button type="submit" class="btn btn-block btn-primary btn-lg">Modificar datos</button>
+      </div>
+
+  {{/autoForm}}
+</template>

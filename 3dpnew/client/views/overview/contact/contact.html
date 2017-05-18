@@ -1,0 +1,41 @@
+
+<template name="Contact">
+  <section id="contact" class="section-padding">
+    <div class="container">
+      <div class="row">
+         {{#if NoLogeadoyPreinscripto}} 
+               <div class="col-md-5 col-sm-6 text-right">
+                <h1 class="big-headline waypoint fade-up">PRE-INSRIPCION EN PROCESO</h1>
+                            <p class="lead waypoint fade-right"> Un email ha sido enviado a su casilla de correo, por favor revise y consteste el correo que le hemos enviado para terminar el proceso de pre-inscripción.</p>
+                          <p class="lead waypoint fade-right">   Considere que el email enviado puede haber sido clasificado como SPAM por su proveedor de email, asi que busquelo en la carpeta SPAM. Ante cualquier duda escribanos a tcrearinnovar@gmail.com.</p>
+                          <p class="lead waypoint fade-right">   Desde ya muchas gracias por su tiempo e interes.</p>
+                             
+
+                </div>    
+         {{/if}}       
+
+        
+         {{#if NoLogeadoyNoPreinscripto}}
+               <div class="col-md-5 col-sm-6 text-right">
+                <h1 class="big-headline waypoint fade-up">PRE-INSRIPCION</h1>
+                  <p class="lead waypoint fade-right"> Te invitamos a realizar un viaje al maravilloso mundo de la impresión 3D. Donde  aprenderás sobre las tecnologias de impresión 3D, realizarás un modelo 3D para luego imprirlo. Por último, veremos la técnica del escaneo 3D. Si te animas llena el formulario de pre-inscripcion y pronto nos pondremos en contacto contigo!
+                     </p>
+               </div>
+                {{> InscriForm class="col-sm-6 col-md-offset-1 col-md-6 waypoint fade-right"}}
+
+         {{/if}} 
+          
+         {{#if currentUser}}  
+                <div class="col-md-5 col-sm-6 text-right">
+                  <h1 class="big-headline waypoint fade-up">Tus Datos</h1>
+                  <p class="lead waypoint fade-right"> Gracias por postularte para el taller de impresion 3D, en los proximos dias nos estaremos comunicando contigo. Chau, hasta pronto !!!      </p>
+                </div>
+              {{> DatosForm class="col-sm-6 col-md-offset-1 col-md-6 waypoint fade-right"}}
+         {{/if}} 
+          
+
+       </div>
+      </div>
+  </section>
+</template>
+

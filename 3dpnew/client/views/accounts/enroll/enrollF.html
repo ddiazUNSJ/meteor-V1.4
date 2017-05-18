@@ -1,0 +1,37 @@
+<template name="EnrollForm">
+
+    
+
+    {{#autoForm schema=enrollFSchema id="enrollFH" type="normal" 
+     validation="submit" class="formCss"}}
+    <fieldset>
+        <div class="form-group">
+             <label class="control-label" for="Password">Password</label>
+             <div class="input-group input-group-lg">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-file glyph-color"></span></span>
+              {{> afFieldInput name='password' type='password' class="form-control" placeholder="Escribe tu password"}}
+             </div> 
+             {{#if afFieldIsInvalid name='password'}}
+              <span class="help-block">{{afFieldMessage name='password'}}</span>
+             {{/if}}                      
+        </div>   
+        
+        <div class="form-group">
+        <label class="control-label" for="confirmPassword">Confirme Password</label>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-duplicate glyph-color"></span></span>
+          {{> afFieldInput name='confirmPassword' type='password' class="form-control custom-control" placeholder="Confirma tu password"}}
+        </div>  
+        {{#if afFieldIsInvalid name='confirmPassword'}}
+          <span class="help-block">{{afFieldMessage name='confirmPassword'}}</span>
+        {{/if}}                   
+      </div> 
+       <div class="form-group">
+              <div class="col-lg-offset-2 col-lg-10">
+                <button type="submit" class="btn btn-default">Confirmar</button>   
+              </div>
+       </div>
+    </fieldset>
+{{/autoForm}}
+</template>
+

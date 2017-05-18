@@ -1,0 +1,19 @@
+<template name="Errorenroll">
+  <section id="errorenroll" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 col-sm-6 text-right">
+          <div class="text-center">
+         {{#if isTokenInvalido}}   
+           <h2><strong>Token no valido !</strong></h2>
+            <p>Usted ya realizo el cambio de password pruebe logearse con password elegido </p>
+         {{else}}  
+            <h2><strong>Error de alta de usuario al hacer la  pre-inscripcion !</strong></h2>
+            <p>Por favor contactese con al telefono +54 264 154422778 , por inconvenientes al inscribirme en taller 3D  </p>
+          {{/if}}  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
