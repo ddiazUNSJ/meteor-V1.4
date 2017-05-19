@@ -53,10 +53,16 @@ Router.plugin('ensureSignedIn', {
 
 
 //Routeo a modulos de autentificacion
+AccountsTemplates.configureRoute('signIn', {
+  name: 'signin',
+  path: '/signin'
+});
+
+
 AccountsTemplates.configureRoute('changePwd');
 AccountsTemplates.configureRoute('enrollAccount');
 AccountsTemplates.configureRoute('forgotPwd');
 AccountsTemplates.configureRoute('resetPwd');
-AccountsTemplates.configureRoute('signIn');
+//AccountsTemplates.configureRoute('signIn');
 AccountsTemplates.configureRoute('signUp');
 AccountsTemplates.configureRoute('verifyEmail');

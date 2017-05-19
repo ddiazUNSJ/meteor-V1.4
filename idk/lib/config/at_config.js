@@ -6,39 +6,18 @@
 // import { Email } from 'meteor/email';
 // Options
 AccountsTemplates.configure({
-  //  defaultLayout: 'emptyLayout',
-    showForgotPasswordLink: true,
-    overrideLoginErrors: true,
-    enablePasswordChange: true,
-
-    sendVerificationEmail: true,
-   enforceEmailVerification: true,
-   confirmPassword: true,
- //  continuousValidation: false,
-  // displayFormLabels: false,
-  // forbidClientAccountCreation: true,
-  // formValidationFeedback: true,
-  homeRoutePath: '/',
-  //showAddRemoveServices: false,
-  //showPlaceholders: true,
-
-  negativeValidation: true,
-  positiveValidation: true,
-  negativeFeedback: false,
-  positiveFeedback: true,
-
-  // Privacy Policy and Terms of Use
-  //privacyUrl: 'privacy',
-  //termsUrl: 'terms-of-use',
-
 
   //******************************************
-  // Behavior
+    // Home default
+    homeRoutePath: '/',
+
+    // Behavior
     confirmPassword: true,
     enablePasswordChange: true,
     forbidClientAccountCreation: false,
     overrideLoginErrors: true,
     sendVerificationEmail: true,
+    enforceEmailVerification: true,
     lowercaseUsername: false,
     focusFirstInput: true,
 
@@ -46,6 +25,7 @@ AccountsTemplates.configure({
     showAddRemoveServices: false,
     showForgotPasswordLink: true,
     showLabels: true,
+   // showDisplayName:true,
     showPlaceholders: true,
     showResendVerificationEmailLink: true,
 
@@ -56,8 +36,24 @@ AccountsTemplates.configure({
     positiveValidation: true,
     positiveFeedback: true,
     showValidating: true,
+  
+    //Template configuration
+      // defaultTemplate: 'Auth_page',
+     defaultLayout: 'blankLayout',
+      // defaultContentRegion: 'main',
+      // defaultLayoutRegions: {}
+
+    // Privacy Policy and Terms of Use
+     //privacyUrl: 'privacy',
+     //termsUrl: 'terms-of-use',
+     // displayFormLabels: false,
+     // formValidationFeedback: true,
+
+    
 
 });
+
+
 
 AccountsTemplates.addField({
     _id: 'nombre',
