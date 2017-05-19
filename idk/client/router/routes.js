@@ -22,8 +22,8 @@
 Router.configure({
     layoutTemplate: 'layout2',
     notFoundTemplate: 'notFound'
-
  });
+
 // Router.route('/', function () {
 //     this.render('home');
 // });
@@ -36,8 +36,7 @@ Router.configure({
 
 
 Router.map(function() {
-    this.route('landing', { path: '/',layoutTemplate: 'blankLayout',});
-
+    this.route('landing', { path: '/',layoutTemplate: 'landingLayout',});
     this.route('private');
     this.route('otro');
     this.route('subirImages');
