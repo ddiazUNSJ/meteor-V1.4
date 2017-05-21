@@ -51,6 +51,15 @@ Router.plugin('ensureSignedIn', {
   only: ['private', 'subirImages']
 });
 
+var myPostLogout = function(){
+    //example redirect after logout
+    Router.go('/home');
+};
+
+AccountsTemplates.configure({
+    onLogoutHook: myPostLogout
+});
+
 
 //Routeo a modulos de autentificacion
 AccountsTemplates.configureRoute('signIn', {

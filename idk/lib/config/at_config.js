@@ -24,7 +24,8 @@ AccountsTemplates.configure({
     // Appearance
     showAddRemoveServices: false,
     showForgotPasswordLink: true,
-    showLabels: true,
+    showLabels: false,
+    //showTitle:false,
    // showDisplayName:true,
     showPlaceholders: true,
     showResendVerificationEmailLink: true,
@@ -49,8 +50,30 @@ AccountsTemplates.configure({
      // displayFormLabels: false,
      // formValidationFeedback: true,
 
-    
+//No muestra el titulo de atForm
+    texts: {
+      title: {
+        signUp: "",
+      }
+    }
+/*
+El cambio de colores de los botones u otro elemento decorativo se hace en /stylesheets/globals/landing.import.less
+Por ejemplo para cambiar el boton de registrarse en atForm en el estado signUp , lo que hice fue agregar la clase at-btn
+como copia de la clase  .btn-primary, la cual tiene los atributos que necesito, no solo el color, la forma, color de fondo,etc,.
+La informacion sobre el nombre de la clase la saque de
+- packages/useraccounts_bootstrap
+- https://github.com/meteor-useraccounts/core/blob/master/Guide.md#css-rules
+- packages/useraccounts_core
+-https://www.youtube.com/watch?v=X6EodWQBDG8
 
+Se agrego
+   //Pinta boton account de color boton de inspinia
+  .at-btn {
+    .btn;
+    .btn-primary;
+  }
+
+*/
 });
 
 
