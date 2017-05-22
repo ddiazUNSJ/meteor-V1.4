@@ -42,7 +42,7 @@ Router.map(function() {
     this.route('subirImages');
     this.route('login3');
     this.route('loginTwo', { layoutTemplate: 'blankLayout',});
-     this.route('login', { layoutTemplate: 'blankLayout',});
+    this.route('login', { layoutTemplate: 'blankLayout',});
 });
 
 
@@ -64,8 +64,8 @@ AccountsTemplates.configure({
 
 //Routeo a modulos de autentificacion
 AccountsTemplates.configureRoute('signIn', {
-  name: 'signin',
-  path: '/signin'
+  name: 'ingresar',
+  path: '/login2'
 });
 
 
@@ -73,6 +73,5 @@ AccountsTemplates.configureRoute('changePwd');
 AccountsTemplates.configureRoute('enrollAccount');
 AccountsTemplates.configureRoute('forgotPwd');
 AccountsTemplates.configureRoute('resetPwd');
-//AccountsTemplates.configureRoute('signIn');
 AccountsTemplates.configureRoute('signUp');
 AccountsTemplates.configureRoute('verifyEmail');

@@ -5,6 +5,7 @@
    // $('body').addClass('gray-bg');
     $('body').addClass('landing-page');
 
+
 }
 
 Template.login.destroyed = function(){

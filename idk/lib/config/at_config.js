@@ -28,7 +28,7 @@ AccountsTemplates.configure({
     //showTitle:false,
    // showDisplayName:true,
     showPlaceholders: true,
-    showResendVerificationEmailLink: true,
+    showResendVerificationEmailLink: false,
 
     // Client-side Validation
     continuousValidation: false,
@@ -53,7 +53,7 @@ AccountsTemplates.configure({
 //No muestra el titulo de atForm
     texts: {
       title: {
-        signUp: "",signIn: "",
+           signUp: "",signIn: "",
       }
     }
 /*

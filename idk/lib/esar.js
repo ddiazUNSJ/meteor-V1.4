@@ -16,7 +16,7 @@ esar = {                                                                        
   email: "Email",                                                                                                      //
   emailAddress: "Dirección de email",                                                                                  //
   emailResetLink: "Reiniciar email",                                                                                   //
-  forgotPassword: "¿Olvidó su contraseña?",                                                                            //
+  forgotPassword: "¿Olvidaste tu contraseña?",                                                                            //
   ifYouAlreadyHaveAnAccount: "Si ya tiene una cuenta",                                                                 //
   newPassword: "Nueva contraseña",                                                                                     //
   newPasswordAgain: "Nueva contraseña (repetir)",                                                                      //
@@ -29,8 +29,8 @@ esar = {                                                                        
   resetYourPassword: "Resetear tu contraseña",                                                                         //
   setPassword: "Definir contraseña",                                                                                   //
   sign: "Ingresar",                                                                                                    //
-  signIn: "Entrar",                                                                                                    //
-  signin: "Iniciar Sesion",                                                                                                    //
+  signIn: "Inicia Sesión",                                                                                                    //
+  signin: "Iniciar Sesión",                                                                                                    //
   signOut: "Salir",                                                                                                    //
   signUp: "Registrate",                                                                                               //
   signupCode: "Código de registro",                                                                                    //
@@ -42,7 +42,7 @@ esar = {                                                                        
   "with": "con",                                                                                                       //
   maxAllowedLength: "Longitud máxima permitida",                                                                       //
   minRequiredLength: "Longitud máxima requerida",                                                                      //
-  resendVerificationEmail: "Mandar email de nuevo",                                                                    //
+  resendVerificationEmail: "Enviar email de nuevo",                                                                    //
   resendVerificationEmailLink_pre: "Email de verificación perdida?",                                                   //
   resendVerificationEmailLink_link: "Volver a mandar",                                                                 //
   enterPassword: "Introducir contraseña",                                                                              //
