@@ -53,7 +53,7 @@ AccountsTemplates.configure({
 //No muestra el titulo de atForm
     texts: {
       title: {
-        signUp: "",
+        signUp: "",signIn: "",
       }
     }
 /*

@@ -52,3 +52,4 @@ Template.landing.rendered = function(){
 Template.landing.destroyed = function() {
     $('body').removeClass('landing-page');
 };
+

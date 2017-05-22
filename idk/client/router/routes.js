@@ -42,6 +42,7 @@ Router.map(function() {
     this.route('subirImages');
     this.route('login3');
     this.route('loginTwo', { layoutTemplate: 'blankLayout',});
+     this.route('login', { layoutTemplate: 'blankLayout',});
 });
 
 
@@ -53,7 +54,7 @@ Router.plugin('ensureSignedIn', {
 
 var myPostLogout = function(){
     //example redirect after logout
-    Router.go('/home');
+    Router.go('/landing');
 };
 
 AccountsTemplates.configure({
