@@ -91,6 +91,49 @@ AccountsTemplates.addField({
 });
 
 
+// router configuracion
+      var myPostLogout = function(){
+          //example redirect after logout
+          Router.go('/');
+      };
+
+      AccountsTemplates.configure({
+          onLogoutHook: myPostLogout
+      });
+
+
+      //Routeo a modulos de autentificacion
+      // AccountsTemplates.configureRoute('signIn', {
+      //   name: 'singin',
+      //   path: '/sign-in',
+      // });
+    //funca
+      AccountsTemplates.configureRoute('signIn', {
+          name: 'singin',
+          path: '/sign-in',
+          template: 'login',
+          layoutTemplate: 'blankLayout',
+          redirect: '/subirImages',
+      });
+
+      AccountsTemplates.configureRoute('signUp', {
+          name: 'singup',
+          path: '/sign-up',
+          template: 'registrar',
+          layoutTemplate: 'blankLayout',
+          redirect: '/subirImages',
+      });
+      
+
+    //  AccountsTemplates.configureRoute('signIn');
+      AccountsTemplates.configureRoute('changePwd');
+      AccountsTemplates.configureRoute('enrollAccount');
+      AccountsTemplates.configureRoute('forgotPwd');
+      AccountsTemplates.configureRoute('resetPwd');
+    // AccountsTemplates.configureRoute('signUp');
+      AccountsTemplates.configureRoute('verifyEmail');
+
+
 
 
 //**** Configuracion de cuentas de email
@@ -131,6 +174,10 @@ Meteor.startup(function() {
        process.env.MAIL_URL = 'smtp://' + encodeURIComponent(email.username) + ':' + encodeURIComponent(email.password) + '@' + encodeURIComponent(email.server) + ':' + email.port;
        } 
   
+//configura account
+
+
+
 
 
 

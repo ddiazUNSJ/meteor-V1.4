@@ -1,9 +1,5 @@
-Template.lregistrar.helpers({
-  getLenguaje() {
-    return T9n.getLanguage ();
-  },
-});
-Template.lregistrar.rendered = function(){
+
+Template.registrar.rendered = function(){
 
     // Add gray color for background in blank layout
    // $('body').addClass('gray-bg');
@@ -12,7 +8,7 @@ Template.lregistrar.rendered = function(){
 
 }
 
-Template.lregistrar.destroyed = function(){
+Template.registrar.destroyed = function(){
 
     // Remove special color for blank layout
  //  $('body').removeClass('gray-bg');

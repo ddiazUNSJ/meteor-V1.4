@@ -33,18 +33,41 @@ Router.configure({
 //     this.render('landing');
 //     this.layout('blankLayout')
 // });
+Router.route('/', {
+    name: 'landing',
+    template: 'landing',
+    layoutTemplate: 'landingLayout',
+});
 
+// Router.route('/sign-in', {
+//     name: 'signin',
+//     template: 'login',
+//     layoutTemplate: 'blankLayout',
+// });
+
+// Router.route('/login', {
+//     name: 'login2',
+//     template: 'login',
+//     layoutTemplate: 'blankLayout',
+// });
 
 Router.map(function() {
-    this.route('landing', { path: '/',layoutTemplate: 'landingLayout',});
+///    this.route('landing', { path: '/',layoutTemplate: 'landingLayout',});
     this.route('private');
     this.route('otro');
     this.route('subirImages');
     this.route('login3');
     this.route('loginTwo', { layoutTemplate: 'blankLayout',});
-    this.route('login', { layoutTemplate: 'blankLayout',});
+    this.route('signin', { template: 'login' ,layoutTemplate: 'blankLayout',});
 });
 
+Router.route('/sign-out', {
+    name: 'signOut',
+    onBeforeAction: function () {
+        AccountsTemplates.logout();
+        this.redirect('/');
+    }
+});
 
 //Autorizacion 
 
@@ -52,26 +75,3 @@ Router.plugin('ensureSignedIn', {
   only: ['private', 'subirImages']
 });
 
-var myPostLogout = function(){
-    //example redirect after logout
-    Router.go('/landing');
-};
-
-AccountsTemplates.configure({
-    onLogoutHook: myPostLogout
-});
-
-
-//Routeo a modulos de autentificacion
-AccountsTemplates.configureRoute('signIn', {
-  name: 'ingresar',
-  path: '/login2'
-});
-
-
-AccountsTemplates.configureRoute('changePwd');
-AccountsTemplates.configureRoute('enrollAccount');
-AccountsTemplates.configureRoute('forgotPwd');
-AccountsTemplates.configureRoute('resetPwd');
-AccountsTemplates.configureRoute('signUp');
-AccountsTemplates.configureRoute('verifyEmail');
