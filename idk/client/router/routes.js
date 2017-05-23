@@ -24,10 +24,32 @@ Router.configure({
     notFoundTemplate: 'notFound'
  });
 
-// Router.route('/', function () {
-//     this.render('home');
-// });
+Router.route('private', function () {
+    this.render('private');
+});
 
+Router.route('/otro', function () {
+    this.render('otro');
+});
+
+Router.route('/subirImages', function () {
+    this.render('subirImages');
+});
+Router.route('/login3', function () {
+    this.render('login3');
+});
+
+Router.route('/loginTwo', {
+    name: 'loginTwo',
+    template: 'loginTwo',
+    layoutTemplate: 'blankLayout',
+});
+
+// Router.route('/signin', {
+//     name: 'signin',
+//     template: 'login',
+//     layoutTemplate: 'blankLayout',
+// });
 
 // Router.route('/landing', function () {
 //     this.render('landing');
@@ -39,7 +61,7 @@ Router.route('/', {
     layoutTemplate: 'landingLayout',
 });
 
-// Router.route('/sign-in', {
+// Router.route('/private', {
 //     name: 'signin',
 //     template: 'login',
 //     layoutTemplate: 'blankLayout',
@@ -51,8 +73,7 @@ Router.route('/', {
 //     layoutTemplate: 'blankLayout',
 // });
 
-Router.map(function() {
-///    this.route('landing', { path: '/',layoutTemplate: 'landingLayout',});
+/*Router.map(function() {
     this.route('private');
     this.route('otro');
     this.route('subirImages');
@@ -60,7 +81,7 @@ Router.map(function() {
     this.route('loginTwo', { layoutTemplate: 'blankLayout',});
     this.route('signin', { template: 'login' ,layoutTemplate: 'blankLayout',});
 });
-
+*/
 Router.route('/sign-out', {
     name: 'signOut',
     onBeforeAction: function () {
