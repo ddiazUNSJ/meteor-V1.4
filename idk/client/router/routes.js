@@ -45,11 +45,12 @@ Router.route('/loginTwo', {
     layoutTemplate: 'blankLayout',
 });
 
-// Router.route('/signin', {
-//     name: 'signin',
-//     template: 'login',
-//     layoutTemplate: 'blankLayout',
-// });
+
+Router.route('/entrar', {
+    name: 'entrar',
+    template: 'login',
+    layoutTemplate: 'blankLayout',
+});
 
 // Router.route('/landing', function () {
 //     this.render('landing');
