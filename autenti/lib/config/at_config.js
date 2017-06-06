@@ -76,13 +76,74 @@ Se agrego
 */
 });
 
+/*AccountsTemplates.addField({
+    _id: 'username',
+    type: 'text',
+    required: true,
+    func: function(value){
+        if (Meteor.isClient) {
+            console.log("Validating username...");
+            var self = this;
+            Meteor.call("userExists", value, function(err, userExists){
+                if (!userExists)
+                    self.setSuccess();
+                else
+                    self.setError(userExists);
+                self.setValidating(false);
+            });
+            return;
+        }
+        // Server
+        return Meteor.call("userExists", value);
+    },
+});*/
+if (Meteor.isServer){
+    function sleep(milliseconds) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds){
+                break;
+            }
+        }
+    }
+
+    Meteor.methods({
+        "userExists": function(username){
+            sleep(1000);
+            var user = Meteor.users.findOne({username: username});
+            if (user)
+                return "Username already in use!"
+            return false;
+        },
+    });
+}
+
+
+AccountsTemplates.addField({
+    _id: 'username',
+    type: 'text',
+    required: true,
+    func: function(value){
+        if (Meteor.isClient) {
+            var self = this;
+            Meteor.call("userExists", value, function(err, userExists){
+                self.setStatus(userExists);
+                self.setValidating(false);
+            });
+            return false;
+        }
+        // Server
+        var result = Meteor.call("userExists", value);
+        return result;
+    },
+});
 
 
 AccountsTemplates.addField({
     _id: 'nombre',
     type: 'text',
     placeholder: {
-        signUp: "Como minimo 6 caracteres y no mas de 50 "
+        signUp: "Nombre y Apellido"
     },
     required: true,
     minLength: 3,
