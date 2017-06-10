@@ -69,7 +69,15 @@ Template.subirfoto.rendered = function () {
     }
 
     $("#download").click(function() {
-     window.open( $image.cropper("getCroppedCanvas"));
+
+      var url = $image.cropper("getCroppedCanvas").toDataURL();
+    var uploadInstance = Images.insert({
+      file: url,
+      isBase64: true, // <— Mandatory
+      fileName: 'pic.png' // <— Mandatory
+    });
+      console.log( $image.cropper("getCroppedCanvas").toDataURL());
+     window.open( $image.cropper("getCroppedCanvas").toDataURL());
     //    window.open($image.cropper("getDataURL"));
     });
 
