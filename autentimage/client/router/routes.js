@@ -28,6 +28,15 @@ Router.route('private', function () {
     this.render('private');
 });
 
+Router.route('dpersonal', function () {
+    this.render('dpersonal');
+});
+
+Router.route('reg', function () {
+    this.render('Register2');
+});
+
+
 Router.route('/invoice', function () {
     this.render('invoice');
 });

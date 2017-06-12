@@ -71,12 +71,30 @@ Template.subirfoto.rendered = function () {
     $("#download").click(function() {
 
       var url = $image.cropper("getCroppedCanvas").toDataURL();
-    var uploadInstance = Images.insert({
-      file: url,
-      isBase64: true, // <— Mandatory
-      fileName: 'pic.png' // <— Mandatory
-    });
-      console.log( $image.cropper("getCroppedCanvas").toDataURL());
+      // Insertar avatar en imagenes gestionadas por ostrio files 
+
+   Images.insert({
+                    file: url,
+                    isBase64: true, // <— Mandatory
+                    fileName: 'pic.png', // <— Mandatory
+                    onUploaded: function (error, fileObj) {
+                        if (error) {
+                          alert('Error during upload: ' + error);
+                        } else {
+                          Meteor.call('cargarAvatarUsu', fileObj.userId,fileObj._id);
+                          alert('File "' + fileObj.name + '" successfully uploaded');
+                          console.log(fileObj._id);
+
+                        }
+                     
+                      },
+                      streams: 'dynamic',
+                      chunkSize: 'dynamic'
+                    });
+
+
+
+     // console.log( $image.cropper("getCroppedCanvas").toDataURL());
      window.open( $image.cropper("getCroppedCanvas").toDataURL());
     //    window.open($image.cropper("getDataURL"));
     });

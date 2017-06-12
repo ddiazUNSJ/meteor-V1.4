@@ -8,12 +8,15 @@
 
 
 //export var Images = new FilesCollection({
+
+  // Ostrio - Files coleccion Imagenes
   Images = new FilesCollection({
   storagePath:'/home/daniel/fotos/',
   collectionName: 'Images',
  // allowClientCode: true, // Required to let you remove uploaded file
   onBeforeUpload: function (file) {
     // Allow upload files under 10MB, and only in png/jpg/jpeg formats
+    console.log("file.size");
     console.log(file.size);
     if (file.size <= 10485760 && /png|jpg|jpeg/i.test(file.ext)) {
       return true;
