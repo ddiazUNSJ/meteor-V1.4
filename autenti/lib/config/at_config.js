@@ -112,7 +112,7 @@ if (Meteor.isServer){
             sleep(1000);
             var user = Meteor.users.findOne({username: username});
             if (user)
-                return "Username already in use!"
+                return "Nombre de usuario en Uso!"
             return false;
         },
     });
