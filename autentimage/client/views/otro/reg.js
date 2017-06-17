@@ -43,14 +43,19 @@
 
 
 
-// Template.Register2.helpers({
-//   /*
-//    * Example:
-//    *  items: function () {
-//    *    return Items.find();
-//    *  }
-//    */
-// });
+Template.Register2.helpers({
+	avatar :function(){
+		return "img/a2.jpg";
+	},
+
+    nombre:function(){
+    	return "Cacho";
+    },
+    apellido:function(){
+    	return "de Bs As";
+    }
+  
+});
 
 // /*****************************************************************************/
 // /* Register2: Lifecycle Hooks */
@@ -63,5 +68,12 @@
 
 // Template.Register2.destroyed = function () {
 // };
+Template.Register2.events({
+
+// 'click #irAAvatar': function(){
+
+//     Router.go("subirfoto");
+// 	},
 
 
+});

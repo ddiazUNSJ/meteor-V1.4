@@ -73,7 +73,7 @@ Template.subirfoto.rendered = function () {
       var url = $image.cropper("getCroppedCanvas").toDataURL();
       // Insertar avatar en imagenes gestionadas por ostrio files 
 
-   Images.insert({
+       Images.insert({
                     file: url,
                     isBase64: true, // <— Mandatory
                     fileName: 'pic.png', // <— Mandatory
