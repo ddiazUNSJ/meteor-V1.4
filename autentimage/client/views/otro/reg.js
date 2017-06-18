@@ -42,11 +42,42 @@
 // });
 
 
-
 Template.Register2.helpers({
+  dirFile: function() {
+    //var user = Meteor.users.findOne(Meteor.userId());
+    //var imagen=Images.findOne(user.profile.avatarID).link();
+   // Images.findOne({}).link();
+   var imagen=dropboxF.findOne({}).link();
+   
+    return imagen;
+   },
+
+   firstName: function() {
+    var user = Meteor.users.findOne(Meteor.userId());
+      if (user) {
+           console.log(user.profile.nombre);
+           return user.profile.nombre;
+      } else {
+          console.log('No user with id', user);
+          return "";
+        }
+    
+  },
+
+
 	avatar :function(){
-		return "img/a2.jpg";
+   var user = Meteor.users.findOne(Meteor.userId());
+    console.log(user.profile.nombre);
+  console.log(user.profile.avatarID);
+   
+   var imagen=Images.findOne(user.profile.avatarID);
+   console.log(imagen.path);
+  //  var avatar=Images.find(_id:profile.avatarID);
+		return imagen.path;
+  //  return "img/a2.jpg";
 	},
+
+
 
     nombre:function(){
     	return "Cacho";

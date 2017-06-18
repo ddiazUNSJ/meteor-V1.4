@@ -28,8 +28,8 @@ Router.route('private', function () {
     this.render('private');
 });
 
-Router.route('dpersonal', function () {
-    this.render('dpersonal');
+Router.route('DatosForm', function () {
+    this.render('DatosForm');
 });
 
 Router.route('reg', function () {

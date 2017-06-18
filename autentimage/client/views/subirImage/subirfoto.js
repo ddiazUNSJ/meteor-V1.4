@@ -73,7 +73,7 @@ Template.subirfoto.rendered = function () {
       var url = $image.cropper("getCroppedCanvas").toDataURL();
       // Insertar avatar en imagenes gestionadas por ostrio files 
 
-       Images.insert({
+       dropboxF.insert({
                     file: url,
                     isBase64: true, // <— Mandatory
                     fileName: 'pic.png', // <— Mandatory
@@ -122,6 +122,9 @@ Template.subirfoto.rendered = function () {
 };
 
 Template.subirfoto.destroyed = function () {
+
+  https://www.dropbox.com/s/7xz58cs78xkor6v/oDS2rBA4rbSzQgpdd-original.png?dl=0
+  "https://dl.dropboxusercontent.com/s/7xz58cs78xkor6v/oDS2rBA4rbSzQgpdd-original.png?dl=0"
 };
 
 
