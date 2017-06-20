@@ -12,6 +12,10 @@ cargarAvatarUsu: function(idUser, idAvatar){
 
 console.log('cargando avatar en server');
 	return Meteor.users.update({ _id: idUser }, { $set: { 'profile.avatarID': idAvatar }});
-}
+},
 
+getNombre: function(idUser){
+console.log('obteniendo nombre de usuario');
+	return Meteor.users.find({ _id: idUser }, { $set: { 'profile.avatarID': idAvatar }});
+}
 })
