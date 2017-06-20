@@ -1,8 +1,14 @@
 // import './subir.html';
+import { $ } from 'meteor/jquery';
+import datatables from 'datatables.net';
+import datatables_bs from 'datatables.net-bs';
+
+
 
 /*****************************************************************************/
 /* subir: Event Handlers and Helpersss .js*/
 /*****************************************************************************/
+
 
 Template.subirfoto.events({
   /*
@@ -26,6 +32,7 @@ Template.subirfoto.helpers({
 /* subir: Lifecycle Hooks */
 /*****************************************************************************/
 Template.subirfoto.created = function () {
+
 };
 
 Template.subirfoto.rendered = function () {
@@ -155,3 +162,7 @@ Template.subirfoto.destroyed = function () {
 };
 
 
+Template.subirfoto.onCreated(function () {
+  datatables(window, $);
+  datatables_bs(window, $);
+});
