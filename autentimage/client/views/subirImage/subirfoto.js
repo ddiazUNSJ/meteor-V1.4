@@ -2,8 +2,10 @@
 import { $ } from 'meteor/jquery';
 import datatables from 'datatables.net';
 import datatables_bs from 'datatables.net-bs';
+import datatables_netbs from 'datatables.net-buttons';
+import datatables_netbuttonbs from 'datatables.net-buttons-bs';
 
-
+ 
 
 /*****************************************************************************/
 /* subir: Event Handlers and Helpersss .js*/
@@ -37,10 +39,49 @@ Template.subirfoto.created = function () {
 
 Template.subirfoto.rendered = function () {
 
- // Initialize dataTables
- //$('#datatable').DataTable().
+//$('.dataTables-example').dataTable({
+  $('#miTabla').dataTable({
+        //"dom": 'lT<"clear">fgitp'
+        dom :'<"html5buttons">BlTfgitp',
+    //     dom: 'Bfrtip',
+        buttons: [
+                {extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
+
+     ],
+  "language": {
+            
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+  }
+  });
+/*      "dom": 'T<"clear">lfrtip'
     $('.dataTables-example').DataTable({
-        dom: '<"html5buttons"B>lTfgitp',
+      
+       dom: '<"html5buttons"B>lTfgitp',
+   
         buttons: [
             { extend: 'copy'},
             {extend: 'csv'},
@@ -59,7 +100,7 @@ Template.subirfoto.rendered = function () {
             }
         ]
 
-    });
+    });*/
       // Set options for cropper plugin
 
     var $image = $(".image-crop > img")
@@ -157,12 +198,13 @@ Template.subirfoto.rendered = function () {
 
 Template.subirfoto.destroyed = function () {
 
-  https://www.dropbox.com/s/7xz58cs78xkor6v/oDS2rBA4rbSzQgpdd-original.png?dl=0
-  "https://dl.dropboxusercontent.com/s/7xz58cs78xkor6v/oDS2rBA4rbSzQgpdd-original.png?dl=0"
+ 
 };
 
 
 Template.subirfoto.onCreated(function () {
   datatables(window, $);
   datatables_bs(window, $);
+    datatables_netbs(window, $);
+    datatables_netbuttonbs(window, $);
 });

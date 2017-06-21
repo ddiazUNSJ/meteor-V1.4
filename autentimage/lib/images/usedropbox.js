@@ -148,31 +148,31 @@ dropboxF = new FilesCollection({
   }
 });
 
-// if (Meteor.isServer) {
-//   // Intercept File's collection remove method
-//   // to remove file from DropBox
-//   var _origRemove = Collections.dropboxFiles.remove;
+if (Meteor.isServer) {
+  // Intercept File's collection remove method
+  // to remove file from DropBox
+  var _origRemove = dropboxF.remove;
 
-//   Collections.dropboxFiles.remove = function(search) {
-//     var cursor = this.collection.find(search);
-//     cursor.forEach(function(fileRef) {
-//       _.each(fileRef.versions, function(vRef) {
-//         var ref;
-//         if (vRef != null ? (ref = vRef.meta) != null ? ref.pipePath : void 0 : void 0) {
-//           client.remove(vRef.meta.pipePath, function(error) {
-//             bound(function() {
-//               if (error) {
-//                 console.error(error);
-//               }
-//             });
-//           });
-//         }
-//       });
-//     });
-//     // Call original method
-//     _origRemove.call(this, search);
-//   };
-// }
+  dropboxF.remove = function(search) {
+    var cursor = this.collection.find(search);
+    cursor.forEach(function(fileRef) {
+      _.each(fileRef.versions, function(vRef) {
+        var ref;
+        if (vRef != null ? (ref = vRef.meta) != null ? ref.pipePath : void 0 : void 0) {
+          client.remove(vRef.meta.pipePath, function(error) {
+            bound(function() {
+              if (error) {
+                console.error(error);
+              }
+            });
+          });
+        }
+      });
+    });
+    // Call original method
+    _origRemove.call(this, search);
+  };
+}
 if (Meteor.isClient) {
   Meteor.subscribe('dropboxFiles.images.all');
 }
