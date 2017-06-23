@@ -6,6 +6,31 @@ import datatables_netbs from 'datatables.net-buttons';
 import datatables_netbuttonbs from 'datatables.net-buttons-bs';
 
  
+ import Tabular from 'meteor/aldeed:tabular';
+// import { Template } from 'meteor/templating';
+// import moment from 'moment';
+// import { Meteor } from 'meteor/meteor';
+// import { Books } from './collections/Books';
+
+// TabularTables.AlbumsList = new Tabular.Table({
+//   name: "Great Albums List",
+//   collection: Albums,
+//   columns: [
+//     {data: "artNr", title: "Art.Nr", class: "col-md-1"},
+//     {data: "artistName", title: "Artist", class: "col-md-3"},
+//     {data: "albumTitle", title: "Title", class: "col-md-4"},
+//     {data: "inStock", title: "In stock", class: "col-md-1"},
+//     {data: "backOrdersPossible", title: "Backorders Possible", class: "col-md-1"},
+//     {data: "price", title: "Price", class: "col-md-1"},
+//     {
+//       tmpl: Meteor.isClient && Template.AlbumActionBtns, class: "col-md-1"
+//     }
+
+//   ]
+// });
+//    {{> tabular table=TabularTables.AlbumsList class="table table-striped table-bordered table-condensed"}}
+
+
 
 /*****************************************************************************/
 /* subir: Event Handlers and Helpersss .js*/
@@ -19,7 +44,28 @@ Template.subirfoto.events({
    *
    *  }
    */
+   'click tbody > tr': function (event) {
+    var dataTable = $(event.target).closest('table').DataTable();
+    var rowData = dataTable.row(event.currentTarget).data();
+    if (!rowData) return; // Won't be data if a placeholder row is clicked
+
+   // alert('pinche en fila ' +rowData.versions.original.meta.pipePath);
+    console.log(rowData);
+    if (rowData.versions.original.meta.pipePath==""){
+        dirImage="img/p3.jpg";
+      }
+    else
+      {
+        dirImage=rowData.versions.original.meta.pipeFrom;
+        }
+     
+      $image.cropper("reset", true).cropper("replace", dirImage);
+     
+    // Your click handler logic here
+  }
 });
+
+
 
 Template.subirfoto.helpers({
   /*
@@ -28,12 +74,22 @@ Template.subirfoto.helpers({
    *    return Items.find();
    *  }
    */
+   // todos: function() {
+   //      console.log(dropboxF.collection.findOne());
+  
+   //  return dropboxF.collection.find();
+
+   //  },
+   imageA:function () {
+     return dirImage;
+     },
 });
 
 /*****************************************************************************/
 /* subir: Lifecycle Hooks */
 /*****************************************************************************/
 Template.subirfoto.created = function () {
+    Meteor.subscribe("miDropbox", Session.get(Meteor.userId()));
 
 };
 
@@ -103,7 +159,7 @@ Template.subirfoto.rendered = function () {
     });*/
       // Set options for cropper plugin
 
-    var $image = $(".image-crop > img")
+    $image = $(".image-crop > img")
     $($image).cropper({
         aspectRatio: 1.618,
         preview: ".img-preview",
@@ -143,11 +199,34 @@ Template.subirfoto.rendered = function () {
 
       var url = $image.cropper("getCroppedCanvas").toDataURL();
       // Insertar avatar en imagenes gestionadas por ostrio files 
-
-       dropboxF.insert({
+      var inputValue="";
+      swal({
+            title: "Ingresar de Archivo!",
+            text: "Nombre Archivo:",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            animation: "slide-from-top",
+            inputPlaceholder: "Escriba nombre de archivo"
+          },
+          function(inputValue){
+            if (inputValue === false) return false;
+            
+            if (inputValue === "") {
+              swal.showInputError("You need to write something!");
+              return false
+            }
+            
+            dropboxF.insert({
                     file: url,
                     isBase64: true, // <— Mandatory
-                    fileName: 'pic.png', // <— Mandatory
+                    fileName: inputValue, // <— Mandatory
+                    onBeforeUpload(file2) {
+                      if ((inputValue ==="")||(inputValue ===undefined)||(inputValue === null)){
+                      return false;
+                        }
+                      else  {return true;}
+                    },
                     onUploaded: function (error, fileObj) {
                         if (error) {
                           alert('Error during upload: ' + error);
@@ -162,12 +241,18 @@ Template.subirfoto.rendered = function () {
                       streams: 'dynamic',
                       chunkSize: 'dynamic'
                     });
-
-
-
-     // console.log( $image.cropper("getCroppedCanvas").toDataURL());
+            swal("Nice!", "You wrote: " + inputValue, "success");
+            // console.log( $image.cropper("getCroppedCanvas").toDataURL());
      window.open( $image.cropper("getCroppedCanvas").toDataURL());
     //    window.open($image.cropper("getDataURL"));
+          
+      });
+      
+       
+
+
+
+     
     });
 
     $("#zoomIn").click(function() {
@@ -184,14 +269,19 @@ Template.subirfoto.rendered = function () {
 
     $("#rotateRight").click(function() {
         $image.cropper("rotate", -45);
+      
     });
 
     $("#setDrag").click(function() {
-        $image.cropper("setDragMode", "crop");
+
+       $image.cropper("reset", true).cropper("replace", dirImage);
+       // $image.cropper.reset;
+       //  $image.cropper.resetPreview;
+       //  $image.cropper("setDragMode", "crop");
+        
     });
 
-
-
+//todos=dropboxF.collection.find();
 
 
 };
@@ -207,4 +297,6 @@ Template.subirfoto.onCreated(function () {
   datatables_bs(window, $);
     datatables_netbs(window, $);
     datatables_netbuttonbs(window, $);
+ dirImage="img/p3.jpg";
+  
 });

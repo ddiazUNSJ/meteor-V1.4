@@ -1,3 +1,4 @@
+import Tabular from 'meteor/aldeed:tabular';
 var Dropbox, Request, bound, client, fs, Collections = {};
 
 if (Meteor.isServer) {
@@ -173,12 +174,44 @@ if (Meteor.isServer) {
     _origRemove.call(this, search);
   };
 }
-if (Meteor.isClient) {
-  Meteor.subscribe('dropboxFiles.images.all');
-}
+// if (Meteor.isClient) {
+//   Meteor.subscribe('dropboxFiles.images.all');
+//  // dropboxF1 = new Meteor.Collection("dropboxFiles");
+// }
 
 if (Meteor.isServer) {
-  Meteor.publish('dropboxFiles.images.all', function () {
-    return dropboxF.collection.find({userId:this.userId });
-  });
+ 
+
+
+Meteor.publish("miDropbox", function (id) {
+
+    // check(id, String);
+    //
+    // if (Match.Error) {
+    //
+    //     console.log('Matching Error ZZZ');
+    // }
+
+   // return dropboxF.collection.find({_id: id});
+    return dropboxF.collection.find({});
+
+});
 }
+
+TabularTables = {};
+
+Meteor.isClient && Template.registerHelper('TabularTables', TabularTables);
+
+  TabularTables.myFiles=new Tabular.Table({
+  name: "myFiles",
+  collection: dropboxF.collection,
+  columns: [
+    {data: "name", title: "nombre"},
+    {data: "userId", title: "Author"},
+    {data: "versions.original.meta.pipePath", title: "directorio"},
+    {data: "versions.original.meta.pipeFrom", title: "direccion"},
+    ]
+  });
+ // Meteor.publish('dropboxFiles.images.all', function () {
+ //    return dropboxF.collection.find({userId:this.userId });
+ //  });

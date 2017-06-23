@@ -61,4 +61,6 @@ aldeed:autoform
 
 # useraccounts:unstyled
 jonblum:jquery-cropper
-#aldeed:tabular
+aldeed:tabular
+peppelg:bootstrap-3-modal
+kevohagan:sweetalert

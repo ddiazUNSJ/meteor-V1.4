@@ -17,5 +17,11 @@ console.log('cargando avatar en server');
 getNombre: function(idUser){
 console.log('obteniendo nombre de usuario');
 	return Meteor.users.find({ _id: idUser }, { $set: { 'profile.avatarID': idAvatar }});
-}
+},
+nombreRepetido: function(idUser,nameArg){
+	var count = dropboxF.collection.find({ name: nameArg }).count();
+      console.log("Encontre " + count+ " nombre");
+      return count > 0;
+
+	}
 })
