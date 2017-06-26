@@ -1,4 +1,6 @@
 import Tabular from 'meteor/aldeed:tabular';
+
+
 var Dropbox, Request, bound, client, fs, Collections = {};
 
 if (Meteor.isServer) {
@@ -207,11 +209,16 @@ Meteor.isClient && Template.registerHelper('TabularTables', TabularTables);
   collection: dropboxF.collection,
   columns: [
     {data: "name", title: "nombre"},
-    {data: "userId", title: "Author"},
-    {data: "versions.original.meta.pipePath", title: "directorio"},
-    {data: "versions.original.meta.pipeFrom", title: "direccion"},
+    {data: "userId", title: "cod. Author"},
+    {data: "_id", title: "cod. Imagen"},
+    {data: "versions.original.meta.pipeFrom", title: "url"},
+    {
+      tmpl: Meteor.isClient && Template.eliminarActualizar
+    }
     ]
   });
+
+
  // Meteor.publish('dropboxFiles.images.all', function () {
  //    return dropboxF.collection.find({userId:this.userId });
  //  });

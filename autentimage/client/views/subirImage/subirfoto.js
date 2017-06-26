@@ -4,6 +4,7 @@ import datatables from 'datatables.net';
 import datatables_bs from 'datatables.net-bs';
 import datatables_netbs from 'datatables.net-buttons';
 import datatables_netbuttonbs from 'datatables.net-buttons-bs';
+import {toDataURL} from  '/client/utilidades/utilities.js';
 
  
  import Tabular from 'meteor/aldeed:tabular';
@@ -32,11 +33,14 @@ import datatables_netbuttonbs from 'datatables.net-buttons-bs';
 
 
 
+
+
 /*****************************************************************************/
 /* subir: Event Handlers and Helpersss .js*/
 /*****************************************************************************/
-
-
+var cambiarA=false;
+var dirImage="";
+var idImage="";
 Template.subirfoto.events({
   /*
    * Example:
@@ -47,41 +51,36 @@ Template.subirfoto.events({
    'click tbody > tr': function (event) {
     var dataTable = $(event.target).closest('table').DataTable();
     var rowData = dataTable.row(event.currentTarget).data();
-    if (!rowData) return; // Won't be data if a placeholder row is clicked
+    if (!rowData) return; 
 
-   // alert('pinche en fila ' +rowData.versions.original.meta.pipePath);
+    dirImageAux=dirImage;
     console.log(rowData);
     if (rowData.versions.original.meta.pipePath==""){
         dirImage="img/p3.jpg";
+
       }
     else
       {
-        dirImage=rowData.versions.original.meta.pipeFrom;
-        }
-     
+        
+          dirImage=rowData.versions.original.meta.pipeFrom;
+          idImage=rowData._id;
+          cambiarA=true;
+          $("#cambiarAvatar").show();
+        
+      }
+     if (dirImage!=dirImageAux){
       $image.cropper("reset", true).cropper("replace", dirImage);
-     
-    // Your click handler logic here
+      }
+   
   }
 });
 
 
 
 Template.subirfoto.helpers({
-  /*
-   * Example:
-   *  items: function () {
-   *    return Items.find();
-   *  }
-   */
-   // todos: function() {
-   //      console.log(dropboxF.collection.findOne());
-  
-   //  return dropboxF.collection.find();
-
-   //  },
+  //Imagen a mostrar correspondiente a la celda seleccionada
    imageA:function () {
-     return dirImage;
+     return Session.get('avatarDataUri'); 
      },
 });
 
@@ -90,10 +89,15 @@ Template.subirfoto.helpers({
 /*****************************************************************************/
 Template.subirfoto.created = function () {
     Meteor.subscribe("miDropbox", Session.get(Meteor.userId()));
-
+    $("#cambiarAvatar").hide();
 };
 
 Template.subirfoto.rendered = function () {
+
+ // oculta o muestra boton cambiarAvatar 
+ if (cambiarA)
+       {$("#cambiarAvatar").show();}
+ else {  $("#cambiarAvatar").hide();}  
 
 //$('.dataTables-example').dataTable({
   $('#miTabla').dataTable({
@@ -161,7 +165,7 @@ Template.subirfoto.rendered = function () {
 
     $image = $(".image-crop > img")
     $($image).cropper({
-        aspectRatio: 1.618,
+        aspectRatio: 1,
         preview: ".img-preview",
         done: function(data) {
             // Output the result data for cropping image.
@@ -188,7 +192,7 @@ Template.subirfoto.rendered = function () {
                     $image.cropper("reset", true).cropper("replace", this.result);
                 };
             } else {
-                showMessage("Please choose an image file.");
+                showMessage("Por favor eliga una archivo que contenga una imagen.");
             }
         });
     } else {
@@ -199,6 +203,7 @@ Template.subirfoto.rendered = function () {
 
       var url = $image.cropper("getCroppedCanvas").toDataURL();
       // Insertar avatar en imagenes gestionadas por ostrio files 
+      var siga=false;
       var inputValue="";
       swal({
             title: "Ingresar de Archivo!",
@@ -210,14 +215,18 @@ Template.subirfoto.rendered = function () {
             inputPlaceholder: "Escriba nombre de archivo"
           },
           function(inputValue){
-            if (inputValue === false) return false;
+            if (inputValue === null) return false;
             
-            if (inputValue === "") {
-              swal.showInputError("You need to write something!");
-              return false
-            }
-            
-            dropboxF.insert({
+             if (inputValue === "") {
+              swal.showInputError("Se necesita un nombre para el archivo!");
+              return false;
+               }
+             
+             Meteor.call('hayNombreRepetido',inputValue,function (error, result){ 
+              // siga = result;
+               if (result==false)
+               { 
+                    dropboxF.insert({
                     file: url,
                     isBase64: true, // <— Mandatory
                     fileName: inputValue, // <— Mandatory
@@ -231,8 +240,10 @@ Template.subirfoto.rendered = function () {
                         if (error) {
                           alert('Error during upload: ' + error);
                         } else {
-                          Meteor.call('cargarAvatarUsu', fileObj.userId,fileObj._id);
-                          alert('File "' + fileObj.name + '" successfully uploaded');
+                          Meteor.call('setIdAvatarEnUsers', fileObj.userId,fileObj._id,function (error, result){
+                              Session.set('avatarUrl', url);
+                          });
+                           swal("La imagen " + inputValue, "ha sido cargada");
                           console.log(fileObj._id);
 
                         }
@@ -241,19 +252,51 @@ Template.subirfoto.rendered = function () {
                       streams: 'dynamic',
                       chunkSize: 'dynamic'
                     });
-            swal("Nice!", "You wrote: " + inputValue, "success");
-            // console.log( $image.cropper("getCroppedCanvas").toDataURL());
-     window.open( $image.cropper("getCroppedCanvas").toDataURL());
-    //    window.open($image.cropper("getDataURL"));
+                    return true;
+                 }
+                 else {
+                       swal.showInputError("El nombre ya existe, elija otro!");
+                       return false;
+                     } 
+
+             });
+
+             
+           
+            
+           
+            
+            // Muestra imagen en una ventana de navegador a parte
+            //window.open( $image.cropper("getCroppedCanvas").toDataURL());
+  
           
       });
       
-       
-
-
-
-     
     });
+
+     $("#cambiarAvatar").click(function() {
+      Meteor.call('setIdAvatarEnUsers', Meteor.userId(),idImage,function (error, result){
+        if (result){
+          //Si la carga es ok cargamos el avatar con la direccion  de la imagen
+          Session.set('avatarUrl', dirImage);
+          //avatar a dataUri
+          Meteor.call('demeAvatarUrl', Meteor.userId(),function (error, result){
+            var dataUri;  
+            if (result!=""){
+              toDataURL(result, function(dataUri) {
+                Session.set('avatarDataUri', dataUri); 
+                console.log('Data:', dataUri)
+              });
+            }
+          });
+        }
+       });
+    
+      
+      swal("Actualizando Avatar con esta imagen " ); 
+      $("#cambiarAvatar").hide();
+       cambiarA=false;
+     });
 
     $("#zoomIn").click(function() {
         $image.cropper("zoom", 0.1);
@@ -297,6 +340,8 @@ Template.subirfoto.onCreated(function () {
   datatables_bs(window, $);
     datatables_netbs(window, $);
     datatables_netbuttonbs(window, $);
- dirImage="img/p3.jpg";
+
+ //dirImage= Session.get('avatarUrl');
+ 
   
 });

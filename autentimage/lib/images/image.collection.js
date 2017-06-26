@@ -66,12 +66,14 @@ Schemas.InscriViewSchema = new SimpleSchema({
   nombre: {
     type: String,
     max: 12,
-    min: 3
+    min: 3,
+    optional: true
   }, 
   avatarID: {
     type: String,
     max: 20,
-    min: 7
+    min: 7,
+    optional: true
         }
    
 });

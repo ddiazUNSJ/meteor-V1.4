@@ -5,9 +5,9 @@
 
 // import './uploadfiles.html';
 //Trae todas la imagenes y los coloca en el objeto uploadedFiles
-Template.uploadedFiles.helpers({
-  uploadedFiles: function () {
-    return Images.find();
-  }
-});
+// Template.uploadedFiles.helpers({
+//   uploadedFiles: function () {
+//     return Images.find();
+//   }
+// });
 
