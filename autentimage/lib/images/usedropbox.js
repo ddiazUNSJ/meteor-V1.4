@@ -218,6 +218,16 @@ Meteor.isClient && Template.registerHelper('TabularTables', TabularTables);
     ]
   });
 
+TabularTables.usuarios=new Tabular.Table({
+  name: "usuarios",
+  collection: Meteor.users,
+  columns: [
+    {data: "profile.nombre", title: "nombre"},
+    {data: "profile.avatarID", title: "IdAvatar"}
+    
+    ]
+  });
+
 
  // Meteor.publish('dropboxFiles.images.all', function () {
  //    return dropboxF.collection.find({userId:this.userId });

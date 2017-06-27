@@ -1,0 +1,17 @@
+<template name="adminUsers">
+ <div id="adminUsuarios">
+    <div class="container">
+ 
+        {{#if isAdmin}}
+
+      <!--       {{> TmplModalUpdate}}
+
+            {{> TmplModalRemove}}
+
+       --> 
+        {{> tabular table=TabularTables.usuarios class="table table-striped table-bordered table-condensed"}}
+
+        {{/if}}
+    </div>
+ </div>
+</template>

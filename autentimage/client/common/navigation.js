@@ -33,7 +33,7 @@ Template.navigation.onCreated(function () {
     
     });
 
-
+    Session.set('rol',"Administrador");
 
 });
 

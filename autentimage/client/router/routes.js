@@ -45,6 +45,11 @@ Router.route('/subirfoto', function () {
     this.render('subirfoto');
 });
 
+Router.route('/adminUsers', function () {
+    this.render('adminUsers');
+});
+
+
 Router.route('/', {
     name: 'landing',
     template: 'landing',
