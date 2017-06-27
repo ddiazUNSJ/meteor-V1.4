@@ -240,7 +240,7 @@ Template.subirfoto.rendered = function () {
                         if (error) {
                           alert('Error during upload: ' + error);
                         } else {
-                          Meteor.call('setIdAvatarEnUsers', fileObj.userId,fileObj._id,function (error, result){
+                          Meteor.call('setIdAvatarEnUsers', fileObj._id,function (error, result){
                               Session.set('avatarUrl', url);
                           });
                            swal("La imagen " + inputValue, "ha sido cargada");
@@ -275,12 +275,12 @@ Template.subirfoto.rendered = function () {
     });
 
      $("#cambiarAvatar").click(function() {
-      Meteor.call('setIdAvatarEnUsers', Meteor.userId(),idImage,function (error, result){
+      Meteor.call('setIdAvatarEnUsers',idImage,function (error, result){
         if (result){
           //Si la carga es ok cargamos el avatar con la direccion  de la imagen
           Session.set('avatarUrl', dirImage);
           //avatar a dataUri
-          Meteor.call('demeAvatarUrl', Meteor.userId(),function (error, result){
+          Meteor.call('demeAvatarUrl',function (error, result){
             var dataUri;  
             if (result!=""){
               toDataURL(result, function(dataUri) {

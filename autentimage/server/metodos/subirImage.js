@@ -12,19 +12,30 @@ Meteor.methods({
 
 
 //Carga un nuevo id  de avatar (idAvatar) en la colleccion usuarios
-setIdAvatarEnUsers: function(idUser, idAvatar){
-
+setIdAvatarEnUsers: function(idAvatar){
+var idUser=this.userId;
+if (!this.userId) {
+      throw new Meteor.Error('Acceso invalido',
+        'Ustede no esta logeado');
+    };
 console.log('cargando avatar en server');
 	return Meteor.users.update({ _id: idUser }, { $set: { 'profile.avatarID': idAvatar }});
 },
 
-getNombre: function(idUser){
+getNombre: function(){
 console.log('obteniendo nombre de usuario');
-	return Meteor.users.find({ _id: idUser }, { $set: { 'profile.avatarID': idAvatar }});
+	return Meteor.users.find({ _id: this.userId  }, { $set: { 'profile.avatarID': idAvatar }});
 },
 
-demeAvatarUrl:function(idUser){
-	var Usuario,avatarId,avatar,avatarUrl;
+demeAvatarUrl:function(){
+	
+	var Usuario,avatarId,avatar,avatarUrl,idUser;
+	idUser=this.userId;
+
+	if (!this.userId) {
+      throw new Meteor.Error('Acceso invalido',
+        'Ustede no esta logeado');
+    };
 	console.log('carga url del avatar ');
 	Usuario =Meteor.users.findOne({ _id: idUser });
 	avatarId=Usuario.profile.avatarID;
@@ -42,7 +53,10 @@ demeAvatarUrl:function(idUser){
 
 //preguntamos si hay nombre repetido
 hayNombreRepetido: function(nameArg){
-
+    if (!this.userId) {
+      throw new Meteor.Error('Acceso invalido',
+        'Ustede no esta logeado');
+    };
    
 	var count = dropboxF.collection.find({ name: nameArg }).count();
       console.log("Encontre " + count+ " nombre");

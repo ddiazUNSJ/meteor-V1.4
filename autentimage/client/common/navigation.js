@@ -16,12 +16,12 @@ Template.navigation.events({
 
 Template.navigation.onCreated(function () {
  
-  Meteor.call('demeAvatarUrl', Meteor.userId(),function (error, result){
+  Meteor.call('demeAvatarUrl', function (error, result){
 
    Session.set('avatarUrl', result);
   });
 
-  Meteor.call('demeAvatarUrl', Meteor.userId(),function (error, result){
+  Meteor.call('demeAvatarUrl',function (error, result){
     
     var dataUri;  
     if (result!=""){
