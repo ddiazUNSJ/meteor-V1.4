@@ -111,30 +111,45 @@ if (Meteor.isServer){
         "userExists": function(username){
             sleep(1000);
             var user = Meteor.users.findOne({username: username});
-            if (user)
-                return "Username already in use!"
-            return false;
+            if (user) {return true;} // usuario existe
+            return false; //usuario no existe
         },
+
+        // "setParticipante": function (idUser,info){
+        //     if (!this.userId) {
+        //       console.log( "error participante")
+        //      throw new Meteor.Error('Acceso invalido','Usted no esta logeado');
+        //       }
+        //     else{
+        //       Meteor.users.update({ _id: this.userId }, { $set: { rol: "Participante" }});
+        //       console.log( "agregamos como participante al usuario")
+        //       return true;
+        //     }
+           
+        // },
     });
 }
-
 
 AccountsTemplates.addField({
     _id: 'username',
     type: 'text',
     required: true,
-    func: function(value){
+    func: function(value){// si funcion retorna true error de validacion , si retorna false No hay error
+        var errorDeValidacion = true;//comenzamos diciendo que hay error
         if (Meteor.isClient) {
-            var self = this;
-            Meteor.call("userExists", value, function(err, userExists){
-                self.setStatus(userExists);
-                self.setValidating(false);
-            });
-            return false;
+            
+            Meteor.call("userExists", value, function(err, usuarioYaExiste){
+
+                if (usuarioYaExiste){ errorDeValidacion=true;} // usuario existe error de validacion
+                else {errorValidacion=false;} // Usuario no existe Siga
+                });
+            return errorDeValidacion; 
         }
         // Server
-        var result = Meteor.call("userExists", value);
-        return result;
+        if (Meteor.isClient) {
+        var errorDeValidacion = Meteor.call("userExists", value);
+        return errorDeValidacion;
+        }
     },
 });
 
@@ -151,8 +166,23 @@ AccountsTemplates.addField({
     errStr: 'Debe ingresar un nombre entre 3 y 50 caracteres',
 });
 
+// Luego de crear un nuevo usuario asignele el rol de participante, esta funcion solo puede llamarse desde el servidor
+//segun API
+      var myPostSubmitFunc = function(userId, info) {
+        
 
-// router configuracion
+        // Asignar como participante
+         Meteor.users.update({ _id: this.userId }, { $set: { rol: "Participante" }});
+         console.log("nuevo usuario agregado " + userId);
+      
+        
+      }
+
+      AccountsTemplates.configure({
+        postSignUpHook: myPostSubmitFunc 
+      });
+
+//Luego de salir del sistema regrese a la pagina landing
       var myPostLogout = function(){
           //example redirect after logout
           Router.go('/');

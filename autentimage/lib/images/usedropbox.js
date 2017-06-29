@@ -10,6 +10,7 @@ if (Meteor.isServer) {
   bound = Meteor.bindEnvironment(function(callback) {
     return callback();
   });
+
   client = new Dropbox.Client({
     key: Meteor.settings.private.dropbox.key ,
     secret: Meteor.settings.private.dropbox.secret,
@@ -195,7 +196,7 @@ Meteor.publish("miDropbox", function (id) {
     // }
 
    // return dropboxF.collection.find({_id: id});
-    return dropboxF.collection.find({});
+    return dropboxF.collection.find({userId:this.userId});
 
 });
 }

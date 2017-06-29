@@ -65,7 +65,7 @@ Schemas.InscriViewSchema = new SimpleSchema({
   
   nombre: {
     type: String,
-    max: 12,
+    max: 25,
     min: 3,
     optional: true
   }, 
@@ -122,25 +122,9 @@ Schemas.User = new SimpleSchema({
         type: Object,
         optional: true,
         blackbox: true
-    },
-    // Add `roles` to your schema if you use the meteor-roles package.
-    // Option 1: Object type
-    // If you specify that type as Object, you must also specify the
-    // `Roles.GLOBAL_GROUP` group whenever you add a user to a role.
-    // Example:
-    // Roles.addUsersToRoles(userId, ["admin"], Roles.GLOBAL_GROUP);
-    // You can't mix and match adding with and without a group since
-    // you will fail validation in some cases.
-    roles: {
-        type: Object,
-        optional: true,
-        blackbox: true
-    },
-    // Option 2: [String] type
-    // If you are sure you will never need to use role groups, then
-    // you can specify [String] as the type
-    roles: {
-        type: [String],
+    }, // Ingrese rol de usuario
+   rol:{
+        type: String,
         optional: true
     },
     
@@ -153,3 +137,24 @@ Schemas.User = new SimpleSchema({
 
 //Inscriptos.attachSchema(Schema.User);
 Meteor.users.attachSchema(Schemas.User);
+
+// --- Publica todos los usuarios, pero solo a los administradores
+if (Meteor.isServer) {
+Meteor.publish('allUsers', function() {
+    if (!this.userId) {
+      throw new Meteor.Error('Acceso invalido',
+        'Usted no esta logeado');
+      }
+    else // verifica si tiene privilegios de administrador
+      { 
+       var rol= Meteor.users.findOne({_thisid: this.userId}).rol;
+        if  (rol!="Administrador") 
+        {
+            throw new Meteor.Error('Acceso invalido',
+            ' Para acceder a esta funcionalidad necesita ser Administrador');
+        }
+       }
+    console.log(Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1}}).fetch());
+    return Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1}});
+});
+}
