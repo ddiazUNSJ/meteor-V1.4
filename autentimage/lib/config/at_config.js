@@ -111,7 +111,12 @@ if (Meteor.isServer){
         "userExists": function(username){
             sleep(1000);
             var user = Meteor.users.findOne({username: username});
-            if (user) {return true;} // usuario existe
+
+            if (user) {
+console.log("existe usuario- validando en server")
+            return true;} // usuario existe
+            console.log("No existe usuario- validando en server")
+
             return false; //usuario no existe
         },
 
@@ -135,18 +140,26 @@ AccountsTemplates.addField({
     type: 'text',
     required: true,
     func: function(value){// si funcion retorna true error de validacion , si retorna false No hay error
-        var errorDeValidacion = true;//comenzamos diciendo que hay error
-        if (Meteor.isClient) {
+       
+        // if (Meteor.isClient) {
             
-            Meteor.call("userExists", value, function(err, usuarioYaExiste){
-
-                if (usuarioYaExiste){ errorDeValidacion=true;} // usuario existe error de validacion
-                else {errorValidacion=false;} // Usuario no existe Siga
-                });
-            return errorDeValidacion; 
-        }
-        // Server
-        if (Meteor.isClient) {
+        //     Meteor.call("userExists", value, function(err, usuarioYaExiste){
+        //      var Siga = false;//comenzamos diciendo que hay error
+        //         if (usuarioYaExiste){
+        //             console.log("usuario existe");
+        //          Siga=false;
+        //          return Siga;} // usuario existe error de validacion
+        //         else {
+        //          Siga=true;
+        //          console.log("usuario no existe");
+        //          return Siga;
+        //           } // Usuario no existe Siga
+        //         });
+            
+        // }
+        // // Server
+        if (Meteor.isServer) {
+          console.log("comienzo de validacion en server");
         var errorDeValidacion = Meteor.call("userExists", value);
         return errorDeValidacion;
         }
@@ -171,10 +184,13 @@ AccountsTemplates.addField({
       var myPostSubmitFunc = function(userId, info) {
         
 
-        // Asignar como participante
-         Meteor.users.update({ _id: this.userId }, { $set: { rol: "Participante" }});
+        // // Asignar como participante
+        // var getUser = Meteor.users.findOne({'_id': user}, {fields: {"rol": 1}}),
+         console.log("update a usuario id: "+userId);
+         Meteor.users.update({ _id: userId }, { $set: {'rol' : "Participante" }});
          console.log("nuevo usuario agregado " + userId);
       
+          
         
       }
 

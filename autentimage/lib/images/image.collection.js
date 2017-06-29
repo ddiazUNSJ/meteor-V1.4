@@ -157,4 +157,14 @@ Meteor.publish('allUsers', function() {
     console.log(Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1}}).fetch());
     return Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1}});
 });
+
+Meteor.publish('datosUsuario', function() {
+    if (!this.userId) {
+      throw new Meteor.Error('Acceso invalido',
+        'Usted no esta logeado');
+      }
+
+ return Meteor.users.find({'_id': this.userId}, {fields:{_id: 1, profile: 1, rol:-1}});
+});
 }
+
