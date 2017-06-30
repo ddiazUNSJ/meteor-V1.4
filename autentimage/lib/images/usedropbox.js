@@ -224,7 +224,8 @@ TabularTables.usuarios=new Tabular.Table({
   collection: Meteor.users,
   columns: [
     {data: "profile.nombre", title: "nombre"},
-    {data: "profile.avatarID", title: "IdAvatar"}
+    {data: "profile.avatarID", title: "IdAvatar"},
+    {data: "rol", title: "Rol"}
     
     ]
   });

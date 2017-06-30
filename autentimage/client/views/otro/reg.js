@@ -70,8 +70,9 @@ Template.Register2.helpers({
 // /*****************************************************************************/
 // /* Register2: Lifecycle Hooks */
 // /*****************************************************************************/
-// Template.Register2.created = function () {
-// };
+Template.Register2.created = function () {
+  Meteor.subscribe('datosUsuario');
+};
 
 // Template.Register2.rendered = function () {
 // };

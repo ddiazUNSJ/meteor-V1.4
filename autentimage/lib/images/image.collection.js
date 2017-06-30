@@ -141,20 +141,26 @@ Meteor.users.attachSchema(Schemas.User);
 // --- Publica todos los usuarios, pero solo a los administradores
 if (Meteor.isServer) {
 Meteor.publish('allUsers', function() {
+    var usuario, nombre, rol;
     if (!this.userId) {
       throw new Meteor.Error('Acceso invalido',
         'Usted no esta logeado');
       }
     else // verifica si tiene privilegios de administrador
       { 
-       var rol= Meteor.users.findOne({_thisid: this.userId}).rol;
+        usuario= Meteor.users.findOne({_id: this.userId});
+        nombre = usuario.profile.nombre;
+        rol=usuario.rol;
         if  (rol!="Administrador") 
         {
+            console.log("error no es administrador");
             throw new Meteor.Error('Acceso invalido',
             ' Para acceder a esta funcionalidad necesita ser Administrador');
         }
        }
-    console.log(Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1}}).fetch());
+    //console.log(Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1}}).fetch());
+
+    console.log(nombre+ " esta publicando todos los usuarios");
     return Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1}});
 });
 
@@ -163,8 +169,11 @@ Meteor.publish('datosUsuario', function() {
       throw new Meteor.Error('Acceso invalido',
         'Usted no esta logeado');
       }
-
- return Meteor.users.find({'_id': this.userId}, {fields:{_id: 1, profile: 1, rol:-1}});
+//, rol:0
+    var usuario= Meteor.users.findOne({_id: this.userId});
+    nombre = usuario.profile.nombre;
+ console.log(nombre+ " esta publicando sus datos");
+ return Meteor.users.find({'_id': this.userId}, {fields:{_id: 1, profile: 1}});
 });
 }
 
