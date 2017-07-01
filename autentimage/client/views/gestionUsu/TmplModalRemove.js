@@ -2,7 +2,7 @@ Template.TmplModalRemove.helpers({
 
 	data: function(){
 
-		return Albums.findOne({_id: Session.get('albumID')});
+		return Meteor.users.findOne({_id: Session.get('usuarioId')});
 	}
 
 });
@@ -17,15 +17,11 @@ Template.TmplModalRemove.events({
 
 		if (Meteor.userId()) {
 
-			var data = Albums.findOne({_id: Session.get('albumID')});
+			var data = Meteor.users.findOne({_id: Session.get('usuarioId')});
 
-			var title = "Album is Removed";
-
-			var msg = data.artistName + " / " + data.albumTitle;
-
-			toastr.success(msg, title);
-
-			Albums.remove({_id: Session.get('albumID')});
+			swal("Se eliminaran los datos de", data.profile.name);
+			
+			Meteor.users.remove({_id: Session.get('usuarioId')});
 
 		}
 	}

@@ -175,5 +175,58 @@ Meteor.publish('datosUsuario', function() {
  console.log(nombre+ " esta publicando sus datos");
  return Meteor.users.find({'_id': this.userId}, {fields:{_id: 1, profile: 1}});
 });
+
+Meteor.users.allow({
+
+
+  insert(userId, doc) {
+    // Administrador Can only insert new documents.
+    console.log("solicito permiso para insertar");
+    var role=Meteor.users.findOne({_id:userId}).rol;
+    return userId && role === "Administrador";
+  },
+  // Administrador puede modificar cualquier campo otros solo ciertos campos
+  update(userId, doc, fields, modifier) {
+    
+    // Administrador Can only change your own documents.
+     var role=Meteor.users.findOne({_id: userId}).rol;
+     if ((role==="Administrador")) {
+      console.log("Administrador solicito permiso para modificar");
+      return  userId && role === "Administrador";
+      }
+      else{
+        console.log("propietario solicita permiso para modificar");
+         return doc.owner === userId;
+      }
+       
+    return false;
+   },
+   
+  
+ 
+  remove(userId, doc) {
+    // Can only remove your own documents.
+     console.log("solicito permiso para eliminar");
+     var role=Meteor.users.findOne({_id: userId}).rol;
+    return userId && role === "Administrador";
+    
+  },
+ 
+  fetch: ['owner']
+});
+
+Meteor.users.deny({
+  // Propietario solo puede modificar ciertos campos
+  update: function (userId, doc, fields, modifier) {
+     var role=Meteor.users.findOne({_id: userId}).rol;
+     if (role==="Admistrador") {
+       console.log("Administrador no tien deny");
+      return false;}
+     if (_.contains(fields, "_createdAt") || _.contains(fields, "_id")|| _.contains(fields, "avatarID")) {
+        console.log("Intentando modificar un campo no permitido en deny");
+      return true;
+    }
+  }
+});
 }
 

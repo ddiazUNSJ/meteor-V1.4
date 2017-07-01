@@ -1,0 +1,13 @@
+<template name="updateUsersForm">
+
+	{{#autoForm collection="Meteor.users" id="afUpdateAlbum" type="update" doc=selectedUserDoc}}
+
+		<fieldset>
+			{{> afQuickField name='profile.nombre'}}
+			
+	    </fieldset>
+	    <button type="submit" class="btn btn-primary">Actualizar</button>
+
+	{{/autoForm}}
+
+</template>
