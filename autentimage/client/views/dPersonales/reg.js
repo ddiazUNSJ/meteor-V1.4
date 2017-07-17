@@ -41,6 +41,18 @@
 
 // });
 
+AutoForm.addHooks('actDatosUsu', {
+
+onError: function(formType, error) {
+  
+    if ((error.errorType && error.errorType === 'Meteor.Error') &&(formType==="update")){
+      swal(error.reason, error.message);
+    }
+  },
+
+
+});
+
 
 Template.Register2.helpers({
     dirFile: function () {

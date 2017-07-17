@@ -173,7 +173,7 @@ Meteor.publish('datosUsuario', function() {
     var usuario= Meteor.users.findOne({_id: this.userId});
     nombre = usuario.profile.nombre;
  console.log(nombre+ " esta publicando sus datos");
- return Meteor.users.find({'_id': this.userId}, {fields:{_id: 1, profile: 1}});
+ return Meteor.users.find({'_id': this.userId}, {fields:{_id: 1, profile: 1, username:1}});
 });
 
 Meteor.users.allow({
@@ -199,7 +199,7 @@ Meteor.users.allow({
          return doc.owner === userId;
       }
        
-    return false;
+    
    },
    
   
@@ -216,16 +216,31 @@ Meteor.users.allow({
 });
 
 Meteor.users.deny({
+
+  insert() { return true; },
+  // update() { 
+  //   console.log("permiso denegado para modificar");
+  //   return true; },
+  remove() { return true; },
   // Propietario solo puede modificar ciertos campos
   update: function (userId, doc, fields, modifier) {
+    
+  console.log("entrando a deny");
      var role=Meteor.users.findOne({_id: userId}).rol;
      if (role==="Admistrador") {
-       console.log("Administrador no tien deny");
-      return false;}
-     if (_.contains(fields, "_createdAt") || _.contains(fields, "_id")|| _.contains(fields, "avatarID")) {
+       console.log("Administrador tiene autorizacion total en deny");
+       return false;}
+     if (_.contains(fields, "createdAt") || _.contains(fields, "_id")|| _.contains(fields, "rol")) {
         console.log("Intentando modificar un campo no permitido en deny");
       return true;
-    }
+     }
+     else{
+      console.log("saliendo de deny con false");
+      return false;
+     }
+
+
+    console.log("saliendo inapropiada de deny ");
   }
 });
 }

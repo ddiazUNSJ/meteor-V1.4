@@ -1,8 +1,8 @@
-<template name="Register2">
+<template name="guardaReg">
 
 
 
-
+{{> modalUserNameUpdate}}
 
   <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
@@ -19,7 +19,7 @@
                                 <p>Sign in today for more expirience.</p> -->
 
 
-                                 {{#autoForm collection="Meteor.users"  id="datosForm" doc=currentUser type="update" validation="submit" autosave=true  class=formCss}}
+                                 {{#autoForm collection="Meteor.users"  id="actDatosUsu" doc=currentUser type="update" validation="submit" autosave=true  class=formCss}}
                                  <fieldset>
                                      <!-- <form role="form">  -->
                                         <div class="form-group"><label>Nombre</label> 
@@ -27,15 +27,28 @@
                                           {{#if afFieldIsInvalid name='profile.nombre'}}
                                                     <span class="help-block">{{afFieldMessage name='profile.nombre'}}</span>
                                            {{/if}}
+                                        
                                         </div>
-                                        <div class="form-group"><label>avatarID</label> 
-                                          {{> afFieldInput name='profile.avatarID' class="form-control" placeholder="Tu avatar"}}
-                                          
+
+                                        <div class="form-group"><label>nombre de usuario</label> 
+                                          {{> afFieldInput name='username' class="form-control" placeholder="Tu username"}}
+                                          {{#if afFieldIsInvalid name='username'}}
+                                                    <span class="help-block">{{afFieldMessage name='username'}}</span>
+                                           {{/if}}
                                         </div>
-                                        <div>
-                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Moficar Datos</strong></button>
+
+                                        <div> 
+                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Moficar Datosos</strong></button>
                                             <label> <input type="checkbox" class="i-checks"> Remember me </label>
                                         </div>
+<button id="btnChangePass" type="button" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#updateUserName">
+
+    <span class="glyphicon glyphicon-pencil"></span>
+
+  </button>
+<a data-toggle="modal" href="http://fiddle.jshell.net/Sherbrow/bHmRB/0/show/" data-target="#myModal">Click me !</a>
+
+
                                    <!--   </form> -->
                                   </fieldset>
                                   {{/autoForm}}
