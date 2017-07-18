@@ -1,0 +1,19 @@
+-Cosas importantes
+ Gestion de usuarios
+  -solo es llevada a cabo por administradors.
+  -No se pude borrar fisicamente, solo se puede marcar como eliminado
+    Se usa el campo active en la colleccion Meteors. users , cuando un usuario es creado esta campo se 
+    pone en true, cuando el usuario es elimininado se pone en false.
+    -Al ingreso al sistema se debe controlar que el usuario este activo,
+    en caso que el mismo haya sido desactivado presentar cartel a usuario que el mismo
+    ha sido desactivado por el administrador y que se debe comunicar con él para ser reactivado 
+  -Por ahora solo se puede cambiar los campos del profile
+  -Falta agregar cambiar email y nombre de usuario, pero aqui se debe
+  tener en cuenta que para dicho cambio se debe chequear la base para no 
+  encontrar usuarios con el mismo nombre o con el mismo email.
+  - Reseteo de password, lo hace el usuario cuando inicia y no se acuerda
+  del password
+
+  Actualmente trabajando en negar acceso a quienes no esten en estado activo, viendo
+  onSubmitHook
+

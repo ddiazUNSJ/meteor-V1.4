@@ -18,7 +18,7 @@ Template.usersActionBtns.events({
           console.log("click btnRemove");
 		if (Meteor.userId()) {
 
-			Session.set("usuarioId", this._id);
+			Session.set("IdusuarioAEliminar", this._id);
 
 		} else {
 

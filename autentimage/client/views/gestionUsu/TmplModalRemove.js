@@ -17,13 +17,19 @@ Template.TmplModalRemove.events({
 
 		if (Meteor.userId()) {
 
-			var data = Meteor.users.findOne({_id: Session.get('usuarioId')});
 
-			swal("Se eliminaran los datos de", data.profile.name);
+			var data = Meteor.users.findOne({_id: Session.get('IdusuarioAEliminar')});
+
+			swal("Se eliminaran los datos de", data.profile.nombre);
 			
-			Meteor.users.remove({_id: Session.get('usuarioId')});
+			// NO se elimina se marca como eliminado y en publicar se filtra por eliminados
+		//	Meteor.users.remove({_id: Session.get('usuarioId')});
+	        Meteor.users.update({ _id: Session.get('usuarioId') }, { $set: {'active' : false }});
+      
+
 
 		}
+		else {swal("no esta autorizado para eliminar usuarios");}
 	}
 
 });

@@ -19,6 +19,8 @@
 //     }
 // });
 
+// ver account para otras rutas definidas
+
 Router.configure({
     layoutTemplate: 'mainLayout',
     notFoundTemplate: 'notFound'
@@ -68,6 +70,6 @@ Router.route('/sign-out', {
 //Autorizacion , va entrar solo si esta logeado 
 
 Router.plugin('ensureSignedIn', {
-  only: ['private', 'invoice']
+  only: ['private', 'invoice','adminUsers']
 });
 

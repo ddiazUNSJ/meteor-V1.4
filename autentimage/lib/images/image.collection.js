@@ -127,7 +127,10 @@ Schemas.User = new SimpleSchema({
         type: String,
         optional: true
     },
-    
+    active:{
+        type: Boolean,
+        optional: true
+    },
     // In order to avoid an 'Exception in setInterval callback' from Meteor
     heartbeat: {
         type: Date,
@@ -161,7 +164,7 @@ Meteor.publish('allUsers', function() {
     //console.log(Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1}}).fetch());
 
     console.log(nombre+ " esta publicando todos los usuarios");
-    return Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1}});
+    return Meteor.users.find({}, {fields: {_id: 1, profile: 1, rol:1, active:1}});
 });
 
 Meteor.publish('datosUsuario', function() {

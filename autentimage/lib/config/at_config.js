@@ -187,7 +187,7 @@ AccountsTemplates.addField({
         // // Asignar como participante
         // var getUser = Meteor.users.findOne({'_id': user}, {fields: {"rol": 1}}),
          console.log("update a usuario id: "+userId);
-         Meteor.users.update({ _id: userId }, { $set: {'rol' : "Participante" }});
+         Meteor.users.update({ _id: userId }, { $set: {'rol' : "Participante" ,'active' : true }});
          console.log("nuevo usuario agregado " + userId);
       
           
@@ -201,6 +201,7 @@ AccountsTemplates.addField({
 //Luego de salir del sistema regrese a la pagina landing
       var myPostLogout = function(){
           //example redirect after logout
+           console.log("saliendo , Chauuuuuuu " );
           Router.go('/');
       };
 
