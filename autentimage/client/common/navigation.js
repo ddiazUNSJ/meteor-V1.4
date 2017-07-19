@@ -27,7 +27,7 @@ Template.navigation.onCreated(function () {
     if (result!=""){
       toDataURL(result, function(dataUri) {
         Session.set('avatarDataUri', dataUri); 
-        console.log('Data:', dataUri)
+      //        console.log('Data:', dataUri)
       });
     }
     

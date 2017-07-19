@@ -7,12 +7,17 @@
     -Al ingreso al sistema se debe controlar que el usuario este activo,
     en caso que el mismo haya sido desactivado presentar cartel a usuario que el mismo
     ha sido desactivado por el administrador y que se debe comunicar con él para ser reactivado 
+    NOta para la funcionalidad 
+     Esta funcion se realiza con Accounts.validateLoginAttempt, alli se pregunta si el usuario esta activo 
+     , en caso de esta no activo se envia crea lanza el error "User enabled", el cual es agregado al archivo
+      de esar para que muestre en la pantalla de login el erro "Usuario inhabilitado para ingresar".        
   -Por ahora solo se puede cambiar los campos del profile
   -Falta agregar cambiar email y nombre de usuario, pero aqui se debe
   tener en cuenta que para dicho cambio se debe chequear la base para no 
   encontrar usuarios con el mismo nombre o con el mismo email.
   - Reseteo de password, lo hace el usuario cuando inicia y no se acuerda
   del password
+
 
   Actualmente trabajando en negar acceso a quienes no esten en estado activo, viendo
   onSubmitHook

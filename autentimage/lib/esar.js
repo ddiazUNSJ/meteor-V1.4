@@ -75,7 +75,8 @@ esar = {                                                                        
     signupCodeIncorrect: "El código de suscripción no coincide.",                                                      //
     signupCodeRequired: "Se requiere el código de suscripción.",                                                       //
     usernameIsEmail: "El usuario no puede ser el email.",                                                              //
-    usernameRequired: "Se requiere un usuario.",                                                                       //
+    usernameRequired: "Se requiere un usuario.",                 
+                                                     //
     accounts: {                                                                                                        //
       "Email already exists.": "El email ya existe.",                                                                  //
       "Email doesn't match the criteria.": "El email no coincide con los criterios.",                                  //
@@ -88,7 +89,7 @@ esar = {                                                                        
       "You are not logged in.": "No estas autenticado.",                                                               //
       "You've been logged out by the server. Please log in again.": "Has sido desconectado por el servidor. Por favor ingresa de nuevo.",
       "Your session has expired. Please log in again.": "Tu sesión ha expirado. Por favor ingresa de nuevo.",          //
-      "Already verified": "Ya ha sido verificada",                                                                     //
+      "Already verified": "Ya ha sido verificada",                                                                    //
       "Invalid email or username": "Email o nombre de usuario no validos",                                             //
       "Internal server error": "Error interno del servidor",                                                           //
       "undefined": "Algo ha ido mal",                                                                                  //
@@ -111,7 +112,8 @@ esar = {                                                                        
       "Please verify your email first. Check the email and follow the link!": "Por favor compruebe su email primero. Siga el link que le ha sido enviado.",
       "A new email has been sent to you. If the email doesn't show up in your inbox, be sure to check your spam folder.": "Un nuevo correo te ha sido enviado. Si no ves el correo en tu bandeja comprueba tu carpeta de spam.",
       "Match failed": "Encontrar pareja coincidente ha fallado",                                                       //
-      "Unknown error": "Error desconocido",                                                                            //
+      "Unknown error": "Error desconocido",   
+      "User enabled":"Usuario inhabilitado para ingresar",                                                                         //
       "Error, too many requests. Please slow down. You must wait 1 seconds before trying again.": "Error, demasiadas peticiones. Por favor no vaya tan rapido. Tienes que esperar almenos 1 segundo antes de provar otra vez."
     }                                                                                                                  //
   }                                                                                                                    //

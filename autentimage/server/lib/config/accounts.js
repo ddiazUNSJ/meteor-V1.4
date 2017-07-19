@@ -77,3 +77,10 @@ Meteor.startup(function() {
 //    // } 
 //  }
 // }
+Accounts.validateLoginAttempt(function(info) {
+    var user = info.user;
+ console.log("validando login");
+ if(!user.active) console.log("usuario inhabilitado para operar con el sistema");
+    if(!user.active) throw new Meteor.Error(403, "User enabled");
+return true;
+});

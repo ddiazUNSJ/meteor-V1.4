@@ -133,7 +133,6 @@ console.log("existe usuario- validando en server")
            
         // },
     });
-}
 
 AccountsTemplates.addField({
     _id: 'username',
@@ -209,6 +208,23 @@ AccountsTemplates.addField({
           onLogoutHook: myPostLogout
       });
 
+     var mySubmitFunc = function(error, state){
+        if (!error) {
+         if (state === "signIn") {
+           if (Meteor.userId() )
+            { 
+
+            console.log( " usuario logeado");
+             }
+          }
+        };
+      };
+
+      AccountsTemplates.configure({
+        onSubmitHook: mySubmitFunc
+      });
+
+} // fin rutina account en server
 
       //Routeo a modulos de autentificacion
       // AccountsTemplates.configureRoute('signIn', {
@@ -240,6 +256,7 @@ AccountsTemplates.addField({
       AccountsTemplates.configureRoute('resetPwd');
     // AccountsTemplates.configureRoute('signUp');
       AccountsTemplates.configureRoute('verifyEmail');
+
 
 
 
