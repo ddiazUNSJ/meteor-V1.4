@@ -17,8 +17,10 @@
   encontrar usuarios con el mismo nombre o con el mismo email.
   - Reseteo de password, lo hace el usuario cuando inicia y no se acuerda
   del password
+  
+  -En accounts.js un chequeo si el usuario esta activo o no, eso se hace mediante la funcion 
+  Accounts.validateLoginAttempt(function(info), la cual si no esta activo lanzara el error
+  "User enabled" y no permitira logearse al usuario.
 
-
-  Actualmente trabajando en negar acceso a quienes no esten en estado activo, viendo
-  onSubmitHook
+  
 

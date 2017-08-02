@@ -77,6 +77,9 @@ Meteor.startup(function() {
 //    // } 
 //  }
 // }
+
+// Valida si el usuario esta o no habilitado para ingresar al sistema
+// es decir esta funcion me permite habilitar o deshabilitar un usuario
 Accounts.validateLoginAttempt(function(info) {
     var user = info.user;
  console.log("validando login");
