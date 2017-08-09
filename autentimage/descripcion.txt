@@ -18,9 +18,9 @@
   - Reseteo de password, lo hace el usuario cuando inicia y no se acuerda
   del password
   
-  -En accounts.js un chequeo si el usuario esta activo o no, eso se hace mediante la funcion 
+  -En accounts.js se agrego un chequeo para determinar si el usuario esta activo o no, eso se hace mediante la funcion 
   Accounts.validateLoginAttempt(function(info), la cual si no esta activo lanzara el error
   "User enabled" y no permitira logearse al usuario.
 
-  
+  -Comenzando a trabajar con Inscripcion a sesiones . creamos directorio inscriSesion y archivo inscriS.js donde crearemos el schema y la coleccion correpondiente
 
