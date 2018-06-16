@@ -20,7 +20,7 @@
 // });
 
 Router.configure({
-    layoutTemplate: 'layout2',
+    layoutTemplate: 'mainLayout',
     notFoundTemplate: 'notFound'
  });
 
@@ -46,11 +46,13 @@ Router.route('/loginTwo', {
 });
 
 
-Router.route('/entrar', {
-    name: 'entrar',
+/*
+Router.route('/sign-in', {
+    name: 'signIn',
     template: 'login',
     layoutTemplate: 'blankLayout',
 });
+*/
 
 // Router.route('/landing', function () {
 //     this.render('landing');

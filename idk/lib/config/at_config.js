@@ -136,7 +136,7 @@ AccountsTemplates.addField({
 
 
 
-//**** Configuracion de cuentas de email
+//**** Configuracion de cuentas de email lee json
 
 EmailConfig = {};
 
